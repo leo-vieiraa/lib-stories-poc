@@ -7,4 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gray_scale">#8affffff</color>
+
+    <color name="progressbar_primary">@color/white</color>
+    <color name="progressbar_secondary">@color/gray_scale</color>
+    <color name="progressbar_max_active">@color/white</color>
 </resources>
