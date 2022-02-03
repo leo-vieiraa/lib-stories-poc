@@ -1,8 +1,6 @@
 package com.example.libstoriespoc.view.customviews
 
-import android.annotation.TargetApi
 import android.content.Context
-import android.os.Build
 import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
@@ -11,11 +9,12 @@ import java.util.ArrayList
 
 class StoryBoardProgressView : LinearLayout {
 
-    private val PROGRESS_BAR_LAYOUT_PARAM = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
-    private val SPACE_LAYOUT_PARAM = LinearLayout.LayoutParams(5, LinearLayout.LayoutParams.WRAP_CONTENT)
+    companion object {
+        private val PROGRESS_BAR_LAYOUT_PARAM = LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
+        private val SPACE_LAYOUT_PARAM = LayoutParams(5, LinearLayout.LayoutParams.WRAP_CONTENT)
+    }
 
     private val progressBars = ArrayList<CustomPauseProgressBar>()
-
     private var storiesCount = -1
     /**
      * pointer of running animation
@@ -27,9 +26,7 @@ class StoryBoardProgressView : LinearLayout {
 
     interface StoriesListener {
         fun onNext()
-
         fun onPrev()
-
         fun onComplete()
     }
 
@@ -41,13 +38,8 @@ class StoryBoardProgressView : LinearLayout {
         init(context, attrs)
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes) {
-        init(context, attrs)
-    }
-
     private fun init(context: Context, attrs: AttributeSet?) {
-        orientation = LinearLayout.HORIZONTAL
+        orientation = HORIZONTAL
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.StoryBoardProgressView)
         storiesCount = typedArray.getInt(R.styleable.StoryBoardProgressView_progressCount, 0)
         typedArray.recycle()
@@ -69,9 +61,9 @@ class StoryBoardProgressView : LinearLayout {
     }
 
     private fun createProgressBar(): CustomPauseProgressBar {
-        val p = CustomPauseProgressBar(context)
-        p.layoutParams = PROGRESS_BAR_LAYOUT_PARAM
-        return p
+        return CustomPauseProgressBar(context).apply {
+            layoutParams = PROGRESS_BAR_LAYOUT_PARAM
+        }
     }
 
     private fun createSpace(): View {
@@ -178,8 +170,18 @@ class StoryBoardProgressView : LinearLayout {
     /**
      * Start progress animation
      */
-    fun startStories() {
-        progressBars[0].startProgress()
+    fun startStories(from: Int) {
+        for (i in progressBars.indices) {
+            progressBars[i].clear()
+        }
+        for (i in 0 until from) {
+            if (progressBars.size > i) {
+                progressBars[i].setMaxWithoutCallback()
+            }
+        }
+        if (progressBars.size > from) {
+            progressBars[from].startProgress()
+        }
     }
 
     /**

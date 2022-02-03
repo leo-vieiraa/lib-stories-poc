@@ -12,29 +12,39 @@ import android.widget.FrameLayout
 import androidx.annotation.AttrRes
 import com.example.libstoriespoc.R
 
-internal class CustomPauseProgressBar @JvmOverloads constructor(
+class CustomPauseProgressBar @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     @AttrRes defStyleAttr: Int = 0) : FrameLayout(context, attrs, defStyleAttr) {
 
-    private val frontProgressView: View
-    private val maxProgressView: View
+    private var frontProgressView: View? = null
+    private var maxProgressView: View? = null
     private var animation: PausableScaleAnimation? = null
     private var duration = DEFAULT_PROGRESS_DURATION.toLong()
     private var callback: Callback? = null
+    private var isStarted = false
 
-    internal interface Callback {
+    interface Callback {
         fun onStartProgress()
         fun onFinishProgress()
     }
+
+    companion object {
+        private const val DEFAULT_PROGRESS_DURATION = 4000L
+    }
+
     init {
         LayoutInflater.from(context).inflate(R.layout.progress_pause, this)
         frontProgressView = findViewById(R.id.front_progress)
-        maxProgressView = findViewById(R.id.max_progress) // work around
+        maxProgressView = findViewById(R.id.max_progress)
     }
 
     fun setDuration(duration: Long) {
         this.duration = duration
+        if (animation != null){
+            animation = null
+            startProgress()
+        }
     }
 
     fun setCallback(callback: Callback) {
@@ -44,21 +54,32 @@ internal class CustomPauseProgressBar @JvmOverloads constructor(
     fun setMax() {
         finishProgress(true)
     }
+
     fun setMin() {
         finishProgress(false)
     }
-    fun setMinWithoutCallback() {
-        maxProgressView.setBackgroundResource(R.color.progressbar_secondary)
 
-        maxProgressView.visibility = View.VISIBLE
+    fun setMinWithoutCallback() {
+        maxProgressView!!.setBackgroundResource(R.color.progressbar_secondary)
+        maxProgressView!!.visibility = View.VISIBLE
         if (animation != null) {
             animation!!.setAnimationListener(null)
             animation!!.cancel()
         }
     }
+
+    fun setMaxWithoutCallback() {
+        maxProgressView!!.setBackgroundResource(R.color.progressbar_max_active)
+        maxProgressView!!.visibility = View.VISIBLE
+        if (animation != null) {
+            animation!!.setAnimationListener(null)
+            animation!!.cancel()
+        }
+    }
+
     private fun finishProgress(isMax: Boolean) {
-        if (isMax) maxProgressView.setBackgroundResource(R.color.progressbar_max_active)
-        maxProgressView.visibility = if (isMax) View.VISIBLE else View.GONE
+        if (isMax) maxProgressView!!.setBackgroundResource(R.color.progressbar_max_active)
+        maxProgressView!!.visibility = if (isMax) View.VISIBLE else View.GONE
         if (animation != null) {
             animation!!.setAnimationListener(null)
             animation!!.cancel()
@@ -67,26 +88,44 @@ internal class CustomPauseProgressBar @JvmOverloads constructor(
             }
         }
     }
-    fun startProgress() {
-        maxProgressView.visibility = View.GONE
 
-        animation = PausableScaleAnimation(0f, 1f, 1f, 1f, Animation.ABSOLUTE, 0f, Animation.RELATIVE_TO_SELF, 0f)
+    fun startProgress() {
+        maxProgressView!!.visibility = View.GONE
+        if (duration <= 0) duration = DEFAULT_PROGRESS_DURATION
+        animation =
+            PausableScaleAnimation(
+                0f,
+                1f,
+                1f,
+                1f,
+                Animation.ABSOLUTE,
+                0f,
+                Animation.RELATIVE_TO_SELF,
+                0f
+            )
         animation!!.duration = duration
         animation!!.interpolator = LinearInterpolator()
         animation!!.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationStart(animation: Animation) {
-                frontProgressView.visibility = View.VISIBLE
+                if (isStarted) {
+                    return
+                }
+                isStarted = true
+                frontProgressView!!.visibility = View.VISIBLE
                 if (callback != null) callback!!.onStartProgress()
             }
 
-            override fun onAnimationRepeat(animation: Animation) {}
-
             override fun onAnimationEnd(animation: Animation) {
+                isStarted = false
                 if (callback != null) callback!!.onFinishProgress()
+            }
+
+            override fun onAnimationRepeat(animation: Animation) {
+                //NO-OP
             }
         })
         animation!!.fillAfter = true
-        frontProgressView.startAnimation(animation)
+        frontProgressView!!.startAnimation(animation)
     }
 
     fun pauseProgress() {
@@ -109,9 +148,10 @@ internal class CustomPauseProgressBar @JvmOverloads constructor(
         }
     }
 
-    private inner class PausableScaleAnimation internal constructor(fromX: Float, toX: Float, fromY: Float,
-                                                                    toY: Float, pivotXType: Int, pivotXValue: Float, pivotYType: Int,
-                                                                    pivotYValue: Float) : ScaleAnimation(fromX, toX, fromY, toY, pivotXType, pivotXValue, pivotYType, pivotYValue) {
+    private inner class PausableScaleAnimation constructor(
+        fromX: Float, toX: Float, fromY: Float,
+        toY: Float, pivotXType: Int, pivotXValue: Float, pivotYType: Int,
+        pivotYValue: Float) : ScaleAnimation(fromX, toX, fromY, toY, pivotXType, pivotXValue, pivotYType, pivotYValue) {
 
         private var mElapsedAtPause: Long = 0
         private var mPaused = false
@@ -129,7 +169,7 @@ internal class CustomPauseProgressBar @JvmOverloads constructor(
         /***
          * pause animation
          */
-        internal fun pause() {
+        fun pause() {
             if (mPaused) return
             mElapsedAtPause = 0
             mPaused = true
@@ -138,16 +178,9 @@ internal class CustomPauseProgressBar @JvmOverloads constructor(
         /***
          * resume animation
          */
-        internal fun resume() {
+        fun resume() {
             mPaused = false
         }
     }
 
-    companion object {
-
-        /***
-         * progress
-         */
-        private val DEFAULT_PROGRESS_DURATION = 2000
-    }
 }
