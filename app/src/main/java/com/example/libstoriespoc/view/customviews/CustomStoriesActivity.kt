@@ -5,6 +5,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import android.widget.ImageView
 import androidx.annotation.AttrRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.bumptech.glide.Glide
@@ -17,12 +18,16 @@ class CustomStoriesActivity @JvmOverloads constructor(
 ) : ConstraintLayout(context, attrs, defStyleAttr), StoryBoardProgressView.StoriesListener {
 
     private var storyBoardProgressView: StoryBoardProgressView? = null
-
     private var counter = 0
-    private val resources = intArrayOf(R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_background, R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_background)
+    private val resources = intArrayOf(
+        R.drawable.ic_launcher_foreground,
+        R.drawable.ic_launcher_background,
+        R.drawable.ic_launcher_foreground,
+        R.drawable.ic_launcher_background
+    )
 
+    //TODO: Analisar uso
     private val durations = longArrayOf(500L, 1000L, 1500L, 4000L)
-
     private var pressTime = 0L
     private var limit = 500L
 
@@ -47,9 +52,17 @@ class CustomStoriesActivity @JvmOverloads constructor(
         false
     }
 
-    fun onCreate() {
-        Glide
-            .with(context)
+    fun setupStories() {
+
+//        super.onCreate(savedInstanceState)
+//
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        getWindow().setFlags(
+//            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//            WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        setContentView(R.layout.activity_main)
+
+        Glide.with(context)
             .load("https://pbs.twimg.com/profile_images/699217734492647428/pCfEzr6L_400x400.png")
             .placeholder(R.drawable.ic_launcher_background)
             .into(findViewById(R.id.imageStories))
@@ -59,12 +72,9 @@ class CustomStoriesActivity @JvmOverloads constructor(
         // or
         // storiesProgressView.setStoriesCountWithDurations(durations);
         storyBoardProgressView!!.setStoriesListener(this)
-        storyBoardProgressView!!.startStories()
+        storyBoardProgressView!!.startStories(counter)
 
-        //TODO: verificar setImageResource
-        R.id.imageStories.apply {
-            (resources[counter])
-        }
+        findViewById<ImageView>(R.id.imageStories)!!.setImageResource(resources[counter])
 
         // bind reverse view
         val reverse = findViewById<View>(R.id.reverse)
@@ -78,32 +88,20 @@ class CustomStoriesActivity @JvmOverloads constructor(
 
     }
 
+//    public override fun onStop() {
+//        super.onStop()
+//    }
+
     override fun onNext() {
-        TODO("Not yet implemented")
+        findViewById<ImageView>(R.id.imageStories)!!.setImageResource(resources[++counter])
     }
 
     override fun onPrev() {
-        TODO("Not yet implemented")
+        if (counter - 1 < 0) return
+        findViewById<ImageView>(R.id.imageStories)!!.setImageResource(resources[--counter])
     }
 
-    override fun onComplete() {
-        TODO("Not yet implemented")
-    }
-
-//    public fun onStop() {
-//        super.onStop()
-//    }
-//
-//    override fun onNext() {
-//        image!!.setImageResource(resources[++counter])
-//    }
-
-//    override fun onPrev() {
-//        if (counter - 1 < 0) return
-//        image!!.setImageResource(resources[--counter])
-//    }
-
-//    override fun onComplete() {}
+    override fun onComplete() {}
 //    public override fun onDestroy() {
 //        // Very important !
 //        storyBoardProgressView!!.destroy()
