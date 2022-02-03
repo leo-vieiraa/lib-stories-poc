@@ -1,4 +1,4 @@
-package com.example.libstoriespoc.view.customviews
+package com.example.libstoriespoc.view.customviews.custom_views
 
 import android.annotation.TargetApi
 import android.content.Context
