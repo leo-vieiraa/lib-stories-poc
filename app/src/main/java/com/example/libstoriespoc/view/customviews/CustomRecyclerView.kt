@@ -1,4 +1,4 @@
-package com.example.libstoriespoc.view.customviews.custom_views
+package com.example.libstoriespoc.view.customviews
 
 import android.content.Context
 import android.util.AttributeSet
@@ -22,7 +22,7 @@ class CustomRecyclerView @JvmOverloads constructor(
 
 
     init {
-       inflate(context, R.layout.customstories,this)
+       inflate(context, R.layout.custom_recycler_view,this)
         recycler = findViewById(R.id.storiesRecyclerView)
         recycler?.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         recycler?.adapter = usersAdapter
