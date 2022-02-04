@@ -16,6 +16,7 @@ import androidx.annotation.AttrRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.bumptech.glide.Glide
 import com.example.libstoriespoc.R
+import com.example.libstoriespoc.view.customviews.custom_views.StoryBoardProgressView
 
 class CustomStoriesActivity @JvmOverloads constructor(
     context: Context,
