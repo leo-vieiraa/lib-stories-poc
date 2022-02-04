@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    tools:parentTag="android.widget.FrameLayout">
 
     <ImageView
         android:id="@+id/imageStories"
@@ -11,7 +12,7 @@
         android:layout_height="400dp"
         android:layout_gravity="center"
         android:contentDescription="@null"
-        tools:src="@drawable/ic_launcher_background" />
+        android:src="@drawable/ic_launcher_background" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,14 +31,15 @@
             android:layout_height="match_parent"
             android:layout_weight="1" />
     </LinearLayout>
+
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_gravity="bottom"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_gravity="bottom"
+        android:layout_marginEnd="8dp"
         android:gravity="center"
         android:paddingBottom="12dp"
         android:text="teste"
@@ -46,39 +48,46 @@
 
     <com.example.libstoriespoc.view.customviews.StoryBoardProgressView
         android:id="@+id/storiesProgressView"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:layout_gravity="top"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:paddingTop="20dp"
-        android:layout_height="match_parent" android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingTop="20dp">
+
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="top"
-            android:src="@drawable/ic_launcher_foreground"/>
+            android:src="@drawable/ic_launcher_foreground" />
+
         <ImageView
             android:id="@+id/imgProfile"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="10dp"
             android:layout_gravity="top"
-            tools:src="@drawable/ic_launcher_foreground"/>
+            android:layout_marginLeft="10dp"
+            tools:src="@drawable/ic_launcher_foreground" />
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Temidayo Adefioye"
                 android:layout_gravity="top"
                 android:layout_marginLeft="5dp"
-                android:textSize="18sp"
-                android:textColor="@color/white"/>
+                android:text="Temidayo Adefioye"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -92,4 +101,4 @@
 
     </LinearLayout>
 
-</FrameLayout>
+</merge>
