@@ -10,7 +10,14 @@
     <com.example.libstoriespoc.view.customviews.CustomStoriesActivity
         android:id="@+id/customStoriesActivity"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
+    <com.example.libstoriespoc.view.customviews.CustomRecyclerView
+        android:id="@+id/customRecyclerViewActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

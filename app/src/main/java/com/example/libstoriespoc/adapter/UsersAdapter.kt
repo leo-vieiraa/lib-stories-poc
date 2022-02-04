@@ -11,13 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.libstoriespoc.R
 
-class UsersAdapter : RecyclerView.Adapter<UsersAdapter.StoriesViewHolder>() {
+class UsersAdapter(private var listImages : List<String>) : RecyclerView.Adapter<UsersAdapter.StoriesViewHolder>() {
 
-    private var listUsersImage = intArrayOf(
-        R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground,
-        R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground,
-        R.drawable.ic_launcher_foreground, R.drawable.ic_launcher_foreground
-    )
     private var itemCheck = -1
 
     var click:(()-> Unit)? = null
@@ -30,8 +25,8 @@ class UsersAdapter : RecyclerView.Adapter<UsersAdapter.StoriesViewHolder>() {
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onBindViewHolder(holder: StoriesViewHolder, @SuppressLint("RecyclerView") position: Int) {
-        listUsersImage[position].apply {
-            holder.bind(itemCheck, position)
+        listImages[position].apply {
+            holder.bind(itemCheck, position, this)
             holder.itemView.setOnClickListener {
                 itemCheck = position
                 click?.invoke()
@@ -40,12 +35,12 @@ class UsersAdapter : RecyclerView.Adapter<UsersAdapter.StoriesViewHolder>() {
         }
     }
 
-    override fun getItemCount(): Int = listUsersImage.size
+    override fun getItemCount(): Int = listImages.size
 
 
     class StoriesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(itemCheck: Int, position: Int) {
+        fun bind(itemCheck: Int, position: Int, url : String) {
 
             if (itemCheck == position) {
                 itemView.findViewById<CardView>(R.id.idOutline).apply {
@@ -63,7 +58,7 @@ class UsersAdapter : RecyclerView.Adapter<UsersAdapter.StoriesViewHolder>() {
 
             itemView.findViewById<ImageView>(R.id.imageUser)?.apply {
                 Glide.with(context)
-                    .load("")
+                    .load(url)
                     .placeholder(R.drawable.ic_launcher_foreground)
                     .into(this)
             }

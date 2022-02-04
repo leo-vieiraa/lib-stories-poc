@@ -39,6 +39,7 @@ class CustomStoriesActivity @JvmOverloads constructor(
         inflate(context, R.layout.activity_custom_stories, this)
     }
 
+
     @SuppressLint("ClickableViewAccessibility")
     private val onTouchListener = View.OnTouchListener { v, event ->
         when (event.action) {

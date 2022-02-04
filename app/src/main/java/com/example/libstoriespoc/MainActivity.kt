@@ -2,7 +2,9 @@ package com.example.libstoriespoc
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.cursoradapter.widget.SimpleCursorAdapter
 import com.example.libstoriespoc.view.customviews.Action
+import com.example.libstoriespoc.view.customviews.CustomRecyclerView
 import com.example.libstoriespoc.view.customviews.CustomStoriesActivity
 import com.example.libstoriespoc.view.customviews.HomeStoriesList
 import com.example.libstoriespoc.view.customviews.Media
@@ -11,6 +13,7 @@ import com.example.libstoriespoc.view.customviews.Thumbnail
 class MainActivity : AppCompatActivity() {
 
     private var customStoriesActivity: CustomStoriesActivity? = null
+    private var customRecyclerView : CustomRecyclerView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,6 +21,14 @@ class MainActivity : AppCompatActivity() {
 
         customStoriesActivity = findViewById(R.id.customStoriesActivity)
         customStoriesActivity?.setupStories()
+
+        val teste : MutableList<String> = mutableListOf()
+       storiesList().forEach {
+           teste.add(it.thumbnail.x1)
+       }
+
+        customRecyclerView = findViewById(R.id.customRecyclerViewActivity)
+        customRecyclerView?.init(teste)
     }
 
     fun storiesList() : MutableList<HomeStoriesList>{

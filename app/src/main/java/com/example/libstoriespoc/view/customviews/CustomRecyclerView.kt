@@ -17,19 +17,19 @@ class CustomRecyclerView @JvmOverloads constructor(
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
 
-    private val usersAdapter = UsersAdapter()
+    private var usersAdapter : UsersAdapter? = null
     private var recycler : RecyclerView? = null
 
-
-    init {
-       inflate(context, R.layout.custom_recycler_view,this)
+    fun init(list:List<String>){
+        inflate(context, R.layout.custom_recycler_view,this)
         recycler = findViewById(R.id.storiesRecyclerView)
         recycler?.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        usersAdapter = UsersAdapter(list)
         recycler?.adapter = usersAdapter
     }
 
     fun click() {
-        usersAdapter.click?.let {
+        usersAdapter?.click?.let {
             it()
         }
     }
