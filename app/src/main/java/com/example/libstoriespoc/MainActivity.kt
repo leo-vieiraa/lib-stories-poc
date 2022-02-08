@@ -2,7 +2,7 @@ package com.example.libstoriespoc
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.cursoradapter.widget.SimpleCursorAdapter
+import android.view.View
 import com.example.libstoriespoc.view.customviews.Action
 import com.example.libstoriespoc.view.customviews.CustomRecyclerView
 import com.example.libstoriespoc.view.customviews.CustomStoriesActivity
@@ -12,26 +12,30 @@ import com.example.libstoriespoc.view.customviews.Thumbnail
 
 class MainActivity : AppCompatActivity() {
 
-    private var customStoriesActivity: CustomStoriesActivity? = null
-    private var customRecyclerView : CustomRecyclerView? = null
+    private var customRecyclerView: CustomRecyclerView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        customStoriesActivity = findViewById(R.id.customStoriesActivity)
-        customStoriesActivity?.setupStories()
-
-        val teste : MutableList<String> = mutableListOf()
-       storiesList().forEach {
-           teste.add(it.thumbnail.x1)
-       }
+        val teste: MutableList<String> = mutableListOf()
+        storiesList().forEach {
+            teste.add(it.thumbnail.x1)
+        }
 
         customRecyclerView = findViewById(R.id.customRecyclerViewActivity)
-        customRecyclerView?.init(teste)
+        customRecyclerView?.init(storiesList(), savedInstanceState)
+        customRecyclerView?.loadInActivity(ActivityDisplayStories())
+
+
+//        customRecyclerView!!.click(this, savedInstanceState)
     }
 
-    fun storiesList() : MutableList<HomeStoriesList>{
+    fun storiesList(): MutableList<HomeStoriesList> {
+        //Stories LNO List<HomeStoriesList>
+        //Stories Premium List<>
+
+
         return mutableListOf(
             HomeStoriesList(
                 key = "stories-1-lno-2021-1",

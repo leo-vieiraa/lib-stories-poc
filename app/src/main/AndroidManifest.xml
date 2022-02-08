@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.libstoriespoc">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -14,7 +14,9 @@
         android:theme="@style/Theme.LibStoriesPOC"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-
+        <activity
+            android:name=".ActivityDisplayStories"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
