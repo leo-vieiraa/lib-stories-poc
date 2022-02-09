@@ -3,12 +3,7 @@ package com.example.libstoriespoc
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import com.example.libstoriespoc.view.customviews.Action
-import com.example.libstoriespoc.view.customviews.CustomRecyclerView
-import com.example.libstoriespoc.view.customviews.CustomStoriesActivity
-import com.example.libstoriespoc.view.customviews.HomeStoriesList
-import com.example.libstoriespoc.view.customviews.Media
-import com.example.libstoriespoc.view.customviews.Thumbnail
+import com.example.libstoriespoc.view.customviews.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,13 +13,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val teste: MutableList<String> = mutableListOf()
+        val teste: MutableList<Story> = mutableListOf()
         storiesList().forEach {
-            teste.add(it.thumbnail.x1)
+            val objetoStory = Story(
+                it.thumbnail.x1,
+                it.media.x1
+            )
+            teste.add(objetoStory)
         }
 
         customRecyclerView = findViewById(R.id.customRecyclerViewActivity)
-        customRecyclerView?.init(storiesList(), savedInstanceState)
+        customRecyclerView?.init(teste, ActivityDisplayStories())
     }
 
     fun storiesList(): MutableList<HomeStoriesList> {

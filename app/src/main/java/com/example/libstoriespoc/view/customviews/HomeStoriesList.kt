@@ -1,5 +1,7 @@
 package com.example.libstoriespoc.view.customviews
 
+import java.io.Serializable
+
 data class Thumbnail(
     val title: String,
     val x1: String,
@@ -30,3 +32,8 @@ data class HomeStoriesList(
     val texts: ArrayList<Object>,
     val action: Action
 )
+
+data class Story(
+    val primeiraImagem: String,
+    val subStories: String
+): Serializable

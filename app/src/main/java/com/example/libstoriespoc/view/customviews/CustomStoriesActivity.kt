@@ -42,39 +42,6 @@ class CustomStoriesActivity @JvmOverloads constructor(
         inflate(context, R.layout.activity_custom_stories, this)
     }
 
-    //CustomStoriesActivity().setList(listaDaAPI)
-
-//    fun setList(lista: List<HomeStoriesList>){
-//        listaDeStorys = lista // 5
-//    }
-//
-//    fun proximoStory(posicao: Int){
-//        //verificar se tem proximo na lista
-//        // posicao = 6
-//
-//        if(listaDeStorys.size >= posicao){
-//            //mostra o story
-//        }else{
-//            //a lista acabou
-//            //fecha a view de story e volta pra lista de usuarios
-//        }
-//
-//    }
-//
-//    fun storyAnterior(posicao: Int){
-//        //verificar se tem anterior na lista
-//
-//        if(posicao > 0){
-//            //mostra o story
-//            //show()
-////            setupStories(listaDeStorys[posicao])
-//        }else{
-//            //a lista acabou
-//            //fecha a view de story e volta pra lista de usuarios
-//        }
-//
-//    }
-
     @SuppressLint("ClickableViewAccessibility")
     private val onTouchListener = View.OnTouchListener { v, event ->
         when (event.action) {
@@ -92,11 +59,11 @@ class CustomStoriesActivity @JvmOverloads constructor(
         false
     }
 
-    fun setupStories() {
+    fun setupStories(storiesList: Story) {
 
         findViewById<ImageView>(R.id.imageStories).apply {
             Glide.with(this)
-                .load("https://www.serasa.com.br/assets/ssw-files/2021-01-29/e1c31d6e26/default_e1c31d6e26.png")
+                .load(storiesList.subStories)
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(this)
         }

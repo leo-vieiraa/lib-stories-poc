@@ -25,24 +25,12 @@ class CustomRecyclerView @JvmOverloads constructor(
     private lateinit var usersAdapter : UsersAdapter
     private lateinit var recycler : RecyclerView
 
-    fun init(list:List<HomeStoriesList>, bundle: Bundle?){
+    fun init(model:List<Story>, activity: Activity){
         inflate(context, R.layout.custom_recycler_view,this)
         recycler = findViewById(R.id.storiesRecyclerView)
         recycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        usersAdapter = UsersAdapter(list) {
-            loadInActivity(ActivityDisplayStories())
-        }
+        usersAdapter = UsersAdapter(model,activity)
         recycler.adapter = usersAdapter
 
     }
-
-    fun loadInActivity(activity: Activity){
-        val intent = Intent(context, activity::class.java)
-        startActivity(context, intent, null)
-    }
-
-    fun loadFragment(){
-
-    }
-
-}
+  }

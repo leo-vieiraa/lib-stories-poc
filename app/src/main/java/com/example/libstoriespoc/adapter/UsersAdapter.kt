@@ -1,6 +1,7 @@
 package com.example.libstoriespoc.adapter
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -17,10 +18,10 @@ import com.example.libstoriespoc.MainActivity
 import com.example.libstoriespoc.R
 import com.example.libstoriespoc.view.customviews.CustomStoriesActivity
 import com.example.libstoriespoc.view.customviews.HomeStoriesList
+import com.example.libstoriespoc.view.customviews.Story
 
 class UsersAdapter(
-    private var listImages : List<HomeStoriesList>,
-    var click:()-> Unit) : RecyclerView.Adapter<UsersAdapter.StoriesViewHolder>() {
+    private var listImages : List<Story>, private var activity: Activity) : RecyclerView.Adapter<UsersAdapter.StoriesViewHolder>() {
 
     private var itemCheck = -1
 
@@ -33,10 +34,9 @@ class UsersAdapter(
     @SuppressLint("NotifyDataSetChanged")
     override fun onBindViewHolder(holder: StoriesViewHolder, @SuppressLint("RecyclerView") position: Int) {
         listImages[position].apply {
-            holder.bind(itemCheck, position, this)
+            holder.bind(itemCheck, position, this, activity)
             holder.itemView.setOnClickListener {
                 itemCheck = position
-                click()
                 notifyDataSetChanged()
             }
         }
@@ -47,7 +47,7 @@ class UsersAdapter(
 
     class StoriesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(itemCheck: Int, position: Int, model : HomeStoriesList ) {
+        fun bind(itemCheck: Int, position: Int, model : Story,activity: Activity ) {
 
             if (itemCheck == position) {
                 itemView.findViewById<CardView>(R.id.idOutline).apply {
@@ -61,9 +61,15 @@ class UsersAdapter(
 
             itemView.findViewById<ImageView>(R.id.imageUser)?.apply {
                 Glide.with(context)
-                    .load(model.thumbnail.x1)
+                    .load(model.primeiraImagem)
                     .placeholder(R.drawable.ic_launcher_foreground)
                     .into(this)
+
+                setOnClickListener {
+                    val intent = Intent(context, activity::class.java)
+                    intent.putExtra("storiesList", model)
+                    ContextCompat.startActivity(context, intent, null)
+                }
             }
         }
     }
