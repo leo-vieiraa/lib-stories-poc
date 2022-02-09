@@ -10,6 +10,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.libstoriespoc.ActivityDisplayStories
 import com.example.libstoriespoc.R
 import com.example.libstoriespoc.adapter.UsersAdapter
 
@@ -21,15 +22,17 @@ class CustomRecyclerView @JvmOverloads constructor(
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
 
-    private var usersAdapter : UsersAdapter? = null
-    private var recycler : RecyclerView? = null
+    private lateinit var usersAdapter : UsersAdapter
+    private lateinit var recycler : RecyclerView
 
     fun init(list:List<HomeStoriesList>, bundle: Bundle?){
         inflate(context, R.layout.custom_recycler_view,this)
         recycler = findViewById(R.id.storiesRecyclerView)
-        recycler?.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        usersAdapter = UsersAdapter(list)
-        recycler?.adapter = usersAdapter
+        recycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        usersAdapter = UsersAdapter(list) {
+            loadInActivity(ActivityDisplayStories())
+        }
+        recycler.adapter = usersAdapter
 
     }
 

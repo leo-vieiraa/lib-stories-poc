@@ -25,10 +25,6 @@ class MainActivity : AppCompatActivity() {
 
         customRecyclerView = findViewById(R.id.customRecyclerViewActivity)
         customRecyclerView?.init(storiesList(), savedInstanceState)
-        customRecyclerView?.loadInActivity(ActivityDisplayStories())
-
-
-//        customRecyclerView!!.click(this, savedInstanceState)
     }
 
     fun storiesList(): MutableList<HomeStoriesList> {
