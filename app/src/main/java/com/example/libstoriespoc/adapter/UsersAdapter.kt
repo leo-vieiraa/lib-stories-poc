@@ -21,7 +21,8 @@ import com.example.libstoriespoc.view.customviews.HomeStoriesList
 import com.example.libstoriespoc.view.customviews.Story
 
 class UsersAdapter(
-    private var listImages : List<Story>, private var activity: Activity) : RecyclerView.Adapter<UsersAdapter.StoriesViewHolder>() {
+    private var listImages: List<Story>, private var activity: Activity
+) : RecyclerView.Adapter<UsersAdapter.StoriesViewHolder>() {
 
     private var itemCheck = -1
 
@@ -47,7 +48,7 @@ class UsersAdapter(
 
     class StoriesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(itemCheck: Int, position: Int, model : Story,activity: Activity ) {
+        fun bind(itemCheck: Int, position: Int, model: Story, activity: Activity) {
 
             if (itemCheck == position) {
                 itemView.findViewById<CardView>(R.id.idOutline).apply {
@@ -55,8 +56,11 @@ class UsersAdapter(
                 }
             } else {
                 itemView.findViewById<CardView>(R.id.idOutline).apply {
-                    setCardBackgroundColor(context.resources.getColor(R.color.teal_700))
+                    setCardBackgroundColor(context.resources.getColor(R.color.blue))
                 }
+            }
+            itemView.findViewById<TextView>(R.id.idNameUser).apply {
+                text = model.title
             }
 
             itemView.findViewById<ImageView>(R.id.imageUser)?.apply {
@@ -70,6 +74,9 @@ class UsersAdapter(
                     intent.putExtra("storiesList", model)
                     ContextCompat.startActivity(context, intent, null)
                 }
+            }
+            if (model.highlight) {
+                itemView.findViewById<CardView>(R.id.cardNovidade).visibility = View.VISIBLE
             }
         }
     }

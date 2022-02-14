@@ -32,5 +32,6 @@ class CustomRecyclerView @JvmOverloads constructor(
         usersAdapter = UsersAdapter(model,activity)
         recycler.adapter = usersAdapter
 
+
     }
   }

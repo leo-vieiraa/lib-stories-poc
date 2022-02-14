@@ -36,5 +36,6 @@ data class HomeStoriesList(
 data class Story(
     val title: String,
     val primeiraImagem: String,
-    val subStories: String
+    val subStories: String,
+    val highlight: Boolean
 ): Serializable

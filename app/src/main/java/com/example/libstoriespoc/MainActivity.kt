@@ -18,7 +18,8 @@ class MainActivity : AppCompatActivity() {
             val objetoStory = Story(
                 it.title,
                 it.thumbnail.x1,
-                it.media.x1
+                it.media.x1,
+                it.highlight
             )
             teste.add(objetoStory)
         }
@@ -63,7 +64,7 @@ class MainActivity : AppCompatActivity() {
                 description = "Ilustra de um homem com o braço erguido celebrando. A esquerda, o texto \"deixa suas dívidas para trás, até 90% de desconto\". Acima, o logo do Serasa Limpa Nome.",
                 viewed = false,
                 time = 3000,
-                highlight = true,
+                highlight = false,
                 thumbnail = Thumbnail(
                     title = "Ilustra de um homem com o braço erguido celebrando.",
                     x1 = "https://www.serasa.com.br/assets/ssw-files/2021-01-29/e1c31d6e26/default_e1c31d6e26.png",
@@ -111,7 +112,7 @@ class MainActivity : AppCompatActivity() {
                 description = "Ilustra de um homem com o braço erguido celebrando. A esquerda, o texto \"deixa suas dívidas para trás, até 90% de desconto\". Acima, o logo do Serasa Limpa Nome.",
                 viewed = false,
                 time = 3000,
-                highlight = true,
+                highlight = false,
                 thumbnail = Thumbnail(
                     title = "Ilustra de um homem com o braço erguido celebrando.",
                     x1 = "https://www.serasa.com.br/assets/ssw-files/2021-01-29/e1c31d6e26/default_e1c31d6e26.png",
