@@ -7,6 +7,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.annotation.AttrRes
 import com.bumptech.glide.Glide
 import com.example.libstoriespoc.R
@@ -67,6 +68,15 @@ class CustomStoriesActivity @JvmOverloads constructor(
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(this)
         }
+
+        findViewById<ImageView>(R.id.imgProfile).apply {
+            Glide.with(this)
+                .load(storiesList.primeiraImagem)
+                .placeholder(R.drawable.ic_launcher_background)
+                .into(this)
+        }
+
+        findViewById<TextView>(R.id.storiesTitle).text = storiesList.title
 
         storyBoardProgressView = findViewById<View>(R.id.storiesProgressView) as StoryBoardProgressView
 

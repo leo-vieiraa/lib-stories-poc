@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
         val teste: MutableList<Story> = mutableListOf()
         storiesList().forEach {
             val objetoStory = Story(
+                it.title,
                 it.thumbnail.x1,
                 it.media.x1
             )

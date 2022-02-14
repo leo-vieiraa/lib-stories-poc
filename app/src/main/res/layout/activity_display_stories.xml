@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivityDisplayStories">
+    tools:context=".ActivityDisplayStories"
+    android:background="@color/black">
 
     <com.example.libstoriespoc.view.customviews.CustomStoriesActivity
         android:id="@+id/customStoriesActivity"
