@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray_scale"
-    tools:context=".MainActivity">
+    tools:context=".ActivityDisplayStories"
+    android:background="@color/black">
 
-    <com.example.libstoriespoc.view.customviews.CustomRecyclerView
-        android:id="@+id/customRecyclerViewActivity"
+    <com.example.libstoriespoc.view.customviews.CustomStoriesActivity
+        android:id="@+id/customStoriesActivity"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

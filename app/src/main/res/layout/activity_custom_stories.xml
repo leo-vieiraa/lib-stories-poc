@@ -6,14 +6,6 @@
     tools:context=".MainActivity"
     tools:parentTag="android.widget.FrameLayout">
 
-    <ImageView
-        android:id="@+id/imageStories"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_gravity="center"
-        android:contentDescription="@null"
-        android:src="@drawable/ic_launcher_background" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -32,20 +24,6 @@
             android:layout_weight="1" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:gravity="center"
-        android:paddingBottom="12dp"
-        android:text="teste"
-        android:textColor="@color/white"
-        android:textSize="17sp" />
-
     <com.example.libstoriespoc.view.customviews.StoryBoardProgressView
         android:id="@+id/storiesProgressView"
         android:layout_width="match_parent"
@@ -62,12 +40,6 @@
         android:paddingTop="20dp">
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="top"
-            android:src="@drawable/ic_launcher_foreground" />
-
-        <ImageView
             android:id="@+id/imgProfile"
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -81,24 +53,33 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/storiesTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top"
                 android:layout_marginLeft="5dp"
-                android:text="Temidayo Adefioye"
+                android:text="Teste"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:layout_marginLeft="5dp"
-                android:text="Today 1:28pm"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="top"-->
+<!--                android:layout_marginLeft="5dp"-->
+<!--                android:text="Today 1:28pm"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="14sp" />-->
         </LinearLayout>
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageStories"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_gravity="center"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_launcher_background" />
 
 </merge>

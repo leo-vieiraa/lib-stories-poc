@@ -2,25 +2,37 @@ package com.example.libstoriespoc
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.libstoriespoc.view.customviews.Action
-import com.example.libstoriespoc.view.customviews.CustomStoriesActivity
-import com.example.libstoriespoc.view.customviews.HomeStoriesList
-import com.example.libstoriespoc.view.customviews.Media
-import com.example.libstoriespoc.view.customviews.Thumbnail
+import android.view.View
+import com.example.libstoriespoc.view.customviews.*
 
 class MainActivity : AppCompatActivity() {
 
-    private var customStoriesActivity: CustomStoriesActivity? = null
+    private var customRecyclerView: CustomRecyclerView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        customStoriesActivity = findViewById(R.id.customStoriesActivity)
-        customStoriesActivity?.setupStories()
+        val teste: MutableList<Story> = mutableListOf()
+        storiesList().forEach {
+            val objetoStory = Story(
+                it.title,
+                it.thumbnail.x1,
+                it.media.x1,
+                it.highlight
+            )
+            teste.add(objetoStory)
+        }
+
+        customRecyclerView = findViewById(R.id.customRecyclerViewActivity)
+        customRecyclerView?.init(teste, ActivityDisplayStories())
     }
 
-    fun storiesList() : MutableList<HomeStoriesList>{
+    fun storiesList(): MutableList<HomeStoriesList> {
+        //Stories LNO List<HomeStoriesList>
+        //Stories Premium List<>
+
+
         return mutableListOf(
             HomeStoriesList(
                 key = "stories-1-lno-2021-1",
@@ -52,7 +64,7 @@ class MainActivity : AppCompatActivity() {
                 description = "Ilustra de um homem com o braço erguido celebrando. A esquerda, o texto \"deixa suas dívidas para trás, até 90% de desconto\". Acima, o logo do Serasa Limpa Nome.",
                 viewed = false,
                 time = 3000,
-                highlight = true,
+                highlight = false,
                 thumbnail = Thumbnail(
                     title = "Ilustra de um homem com o braço erguido celebrando.",
                     x1 = "https://www.serasa.com.br/assets/ssw-files/2021-01-29/e1c31d6e26/default_e1c31d6e26.png",
@@ -100,7 +112,7 @@ class MainActivity : AppCompatActivity() {
                 description = "Ilustra de um homem com o braço erguido celebrando. A esquerda, o texto \"deixa suas dívidas para trás, até 90% de desconto\". Acima, o logo do Serasa Limpa Nome.",
                 viewed = false,
                 time = 3000,
-                highlight = true,
+                highlight = false,
                 thumbnail = Thumbnail(
                     title = "Ilustra de um homem com o braço erguido celebrando.",
                     x1 = "https://www.serasa.com.br/assets/ssw-files/2021-01-29/e1c31d6e26/default_e1c31d6e26.png",

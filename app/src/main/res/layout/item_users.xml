@@ -9,41 +9,76 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/idOutline"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_gravity="center"
-        app:cardBackgroundColor="@color/teal_700"
-        app:cardCornerRadius="32dp"
+        app:cardBackgroundColor="@color/blue"
+        app:cardCornerRadius="36dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
             android:layout_gravity="center"
-            app:cardCornerRadius="30dp">
+            app:cardCornerRadius="34dp">
 
             <ImageView
                 android:id="@+id/imageUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardNovidade"
+        android:layout_width="64dp"
+        android:layout_height="18dp"
+        app:cardBackgroundColor="@color/blue"
+        app:cardCornerRadius="36dp"
+        app:strokeColor="@color/white"
+        app:strokeWidth="2dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/idOutline"
+        app:layout_constraintEnd_toEndOf="@+id/idOutline"
+        app:layout_constraintStart_toStartOf="@+id/idOutline">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textNovidade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Novidade"
+                android:textSize="11dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
     <TextView
         android:id="@+id/idNameUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Name"
+        android:orientation="horizontal"
+        android:gravity="center"
         android:layout_marginTop="5dp"
-        android:maxLines="1"
+        android:maxLines="2"
         android:maxWidth="55dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/idOutline"
