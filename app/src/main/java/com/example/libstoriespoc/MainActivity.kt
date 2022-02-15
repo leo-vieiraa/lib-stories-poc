@@ -19,7 +19,8 @@ class MainActivity : AppCompatActivity() {
                 it.title,
                 it.thumbnail.x1,
                 it.media.x1,
-                it.highlight
+                it.highlight,
+                it.action.text
             )
             teste.add(objetoStory)
         }

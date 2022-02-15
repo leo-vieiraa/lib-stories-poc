@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gray_scale">#8affffff</color>
     <color name="blue">#0B64E0</color>
+    <color name="pink">#E63888</color>
 
     <color name="progressbar_primary">@color/white</color>
     <color name="progressbar_secondary">@color/gray_scale</color>

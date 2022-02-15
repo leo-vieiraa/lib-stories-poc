@@ -2,15 +2,19 @@ package com.example.libstoriespoc.view.customviews
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.AttrRes
 import com.bumptech.glide.Glide
 import com.example.libstoriespoc.R
+import com.google.android.material.internal.ContextUtils.getActivity
 
 class CustomStoriesActivity @JvmOverloads constructor(
     context: Context,
@@ -60,6 +64,7 @@ class CustomStoriesActivity @JvmOverloads constructor(
         false
     }
 
+    @SuppressLint("RestrictedApi")
     fun setupStories(storiesList: Story) {
 
         findViewById<ImageView>(R.id.imageStories).apply {
@@ -74,6 +79,18 @@ class CustomStoriesActivity @JvmOverloads constructor(
                 .load(storiesList.primeiraImagem)
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(this)
+        }
+
+        findViewById<Button>(R.id.buttonWebView).apply {
+            text = storiesList.text
+            setOnClickListener {
+                val intentButton = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/"))
+                context.startActivity(intentButton)
+            }
+        }
+
+        findViewById<ImageView>(R.id.buttonClose).setOnClickListener {
+            getActivity(context)?.finish()
         }
 
         findViewById<TextView>(R.id.storiesTitle).text = storiesList.title
