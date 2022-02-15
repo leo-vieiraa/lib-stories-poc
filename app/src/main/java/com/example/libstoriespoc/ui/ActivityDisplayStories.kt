@@ -1,9 +1,10 @@
-package com.example.libstoriespoc
+package com.example.libstoriespoc.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.libstoriespoc.view.customviews.CustomStoriesActivity
-import com.example.libstoriespoc.view.customviews.Story
+import com.example.libstoriespoc.R
+import com.example.libstoriespoc.ui.customviews.CustomStoriesActivity
+import com.example.libstoriespoc.domain.model.Story
 
 class ActivityDisplayStories() : AppCompatActivity() {
 

@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
-    <com.example.libstoriespoc.view.customviews.CustomRecyclerView
+    <com.example.libstoriespoc.ui.customviews.CustomRecyclerView
         android:id="@+id/customRecyclerViewActivity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

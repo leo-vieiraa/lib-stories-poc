@@ -1,4 +1,4 @@
-package com.example.libstoriespoc.view.customviews
+package com.example.libstoriespoc.ui.customviews
 
 import android.content.Context
 import android.util.AttributeSet

@@ -1,4 +1,4 @@
-package com.example.libstoriespoc.view.customviews
+package com.example.libstoriespoc.ui.customviews
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.annotation.AttrRes
 import com.bumptech.glide.Glide
 import com.example.libstoriespoc.R
+import com.example.libstoriespoc.domain.model.Story
 
 class CustomStoriesActivity @JvmOverloads constructor(
     context: Context,
@@ -32,9 +33,6 @@ class CustomStoriesActivity @JvmOverloads constructor(
     private val durations = longArrayOf(500L, 1000L, 1500L, 4000L)
     private var pressTime = 0L
     private var limit = 500L
-
-    private lateinit var listaDeStorys : List<HomeStoriesList>
-
     companion object {
         private const val PROGRESS_COUNT = 4
     }
@@ -64,14 +62,14 @@ class CustomStoriesActivity @JvmOverloads constructor(
 
         findViewById<ImageView>(R.id.imageStories).apply {
             Glide.with(this)
-                .load(storiesList.subStories)
+                .load(storiesList.media.x1)
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(this)
         }
 
         findViewById<ImageView>(R.id.imgProfile).apply {
             Glide.with(this)
-                .load(storiesList.primeiraImagem)
+                .load(storiesList.thumbnail.x1)
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(this)
         }
@@ -105,16 +103,14 @@ class CustomStoriesActivity @JvmOverloads constructor(
         skip.apply {
             setOnClickListener { storyBoardProgressView.skip() }
             setOnTouchListener(onTouchListener)
+
         }
     }
-
-//    public override fun onStop() {
-//        super.onStop()
-//    }
 
     override fun onNext() {
         if (counter + 1 > resourceList.size) return
         findViewById<ImageView>(R.id.imageStories).setImageResource(resourceList[++counter])
+
     }
 
     override fun onPrev() {
@@ -124,6 +120,8 @@ class CustomStoriesActivity @JvmOverloads constructor(
 
     override fun onComplete() {
         println("Completou")
+
+
 
         //metodo para destruir
 
