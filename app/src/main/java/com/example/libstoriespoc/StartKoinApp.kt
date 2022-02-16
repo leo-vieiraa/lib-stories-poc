@@ -2,15 +2,17 @@ package com.example.libstoriespoc
 
 import android.app.Application
 import com.example.libstoriespoc.di.Inject.appModule
-import org.koin.android.viewmodel.dsl.viewModel
-import org.koin.dsl.module
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
+import org.koin.core.context.stopKoin
+
 
 class StartKoinAp : Application() {
 
     override fun onCreate() {
 
         super.onCreate()
-
 
         startKoin{
 
@@ -21,9 +23,7 @@ class StartKoinAp : Application() {
             modules(listOf(appModule))
 
         }
-
     }
-
 
     override fun onTerminate() {
 
@@ -32,5 +32,4 @@ class StartKoinAp : Application() {
         stopKoin()
 
     }
-
 }

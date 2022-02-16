@@ -12,6 +12,9 @@ import androidx.annotation.AttrRes
 import com.bumptech.glide.Glide
 import com.example.libstoriespoc.R
 import com.example.libstoriespoc.domain.model.Story
+import com.example.libstoriespoc.presentation.viewmodel.StoriesViewModel
+import org.koin.android.viewmodel.compat.ViewModelCompat.viewModel
+import org.koin.experimental.property.inject
 
 class CustomStoriesActivity @JvmOverloads constructor(
     context: Context,
@@ -20,6 +23,9 @@ class CustomStoriesActivity @JvmOverloads constructor(
 ) : FrameLayout(context, attrs, defStyleAttr), StoryBoardProgressView.StoriesListener {
 
     private lateinit var storyBoardProgressView: StoryBoardProgressView
+    private var storiesViewModel : StoriesViewModel by lazy{
+        val viewModel : StoriesViewModel by viewModel()
+    }
 
     private var counter = 0
     private val resourceList = intArrayOf(

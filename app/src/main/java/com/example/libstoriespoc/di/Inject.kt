@@ -1,23 +1,17 @@
 package com.example.libstoriespoc.di
 
+import com.example.libstoriespoc.data.repository.StoriesRepository
+import com.example.libstoriespoc.presentation.viewmodel.StoriesViewModel
+import org.koin.android.viewmodel.compat.ViewModelCompat.viewModel
+import org.koin.dsl.module
+
 object Inject {
 
     val appModule = module {
 
-        single { CounterRespository(get()) }
+        factory { StoriesRepository(get()) }
 
-        factory { CreateCounter(get()) }
-
-        factory { Update(get()) }
-
-        factory { DeleteCounters(get()) }
-
-        factory { GetCounters(get()) }
-
-        viewModel<CounterViewModel> { CounterViewModelImp(get(),get(),get(),get()) }
-
-
+        viewModel { StoriesViewModel(get()) }
 
     }
-
 }
