@@ -5,8 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.libstoriespoc.data.repository.StoriesRepository
 import com.example.libstoriespoc.domain.model.Story
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class StoriesViewModel (val repository: StoriesRepository) : ViewModel() {
+@HiltViewModel
+class StoriesViewModel @Inject constructor(
+    private val repository: StoriesRepository) : ViewModel() {
 
     val _checkStories = MutableLiveData<MutableList<Story>>()
     val checkStories : LiveData<MutableList<Story>> = _checkStories

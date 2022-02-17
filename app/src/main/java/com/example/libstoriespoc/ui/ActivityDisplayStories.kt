@@ -5,7 +5,9 @@ import android.os.Bundle
 import com.example.libstoriespoc.R
 import com.example.libstoriespoc.ui.customviews.CustomStoriesActivity
 import com.example.libstoriespoc.domain.model.Story
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ActivityDisplayStories() : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

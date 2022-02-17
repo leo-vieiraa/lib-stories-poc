@@ -5,11 +5,9 @@ import com.example.libstoriespoc.domain.model.Media
 import com.example.libstoriespoc.domain.model.Story
 import com.example.libstoriespoc.domain.model.Thumbnail
 
-class StoriesList() {
+object StoriesList {
 
-    companion object {
-
-        var storiesList = mutableListOf(
+    var storiesList = mutableListOf(
             Story(
                 key = "stories-1-lno-2021-1",
                 title = "Nome limpo",
@@ -132,9 +130,7 @@ class StoriesList() {
             )
         )
 
-    }
-
-    fun storiesList(): MutableList<Story> {
+    fun getStories(): MutableList<Story> {
         //Stories LNO List<HomeStoriesList>
         //Stories Premium List<>
         return storiesList
@@ -147,5 +143,9 @@ class StoriesList() {
             }
         }
     }
+
+//    fun getStoriesService(): StoriesListImpl {
+//
+//    }
 
 }

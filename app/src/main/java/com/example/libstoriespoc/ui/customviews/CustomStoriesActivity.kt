@@ -13,19 +13,19 @@ import com.bumptech.glide.Glide
 import com.example.libstoriespoc.R
 import com.example.libstoriespoc.domain.model.Story
 import com.example.libstoriespoc.presentation.viewmodel.StoriesViewModel
-import org.koin.android.viewmodel.compat.ViewModelCompat.viewModel
-import org.koin.experimental.property.inject
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class CustomStoriesActivity @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null, @AttrRes
     defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr), StoryBoardProgressView.StoriesListener {
 
+    @Inject lateinit var storiesViewModel: StoriesViewModel
+
     private lateinit var storyBoardProgressView: StoryBoardProgressView
-    private var storiesViewModel : StoriesViewModel by lazy{
-        val viewModel : StoriesViewModel by viewModel()
-    }
 
     private var counter = 0
     private val resourceList = intArrayOf(
@@ -109,6 +109,7 @@ class CustomStoriesActivity @JvmOverloads constructor(
         skip.apply {
             setOnClickListener { storyBoardProgressView.skip() }
             setOnTouchListener(onTouchListener)
+            storiesViewModel.setStories(storiesList)
 
         }
     }
@@ -125,7 +126,7 @@ class CustomStoriesActivity @JvmOverloads constructor(
     }
 
     override fun onComplete() {
-        println("Completou")
+        //storiesViewModel.setStories()
 
 
 

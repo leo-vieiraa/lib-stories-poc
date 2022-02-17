@@ -4,14 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.libstoriespoc.R
 import com.example.libstoriespoc.data.services.StoriesList.Companion.storiesList
-import com.example.libstoriespoc.presentation.viewmodel.StoriesViewModel
 import com.example.libstoriespoc.ui.customviews.*
-import org.koin.android.viewmodel.compat.ViewModelCompat.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private var customRecyclerView: CustomRecyclerView? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

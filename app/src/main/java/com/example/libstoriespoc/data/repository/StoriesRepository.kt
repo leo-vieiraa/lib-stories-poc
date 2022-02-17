@@ -1,16 +1,18 @@
 package com.example.libstoriespoc.data.repository
 
-import com.example.libstoriespoc.data.services.StoriesList
+import com.example.libstoriespoc.data.services.StoriesList.storiesList
+import com.example.libstoriespoc.data.services.StoriesListImpl
 import com.example.libstoriespoc.domain.model.Story
+import javax.inject.Inject
 
-class StoriesRepository (val storiesList: StoriesList) : StoriesRepositoryImpl{
+class StoriesRepository @Inject constructor (private val storiesListImpl: StoriesListImpl){
 
-    override fun getStories(): MutableList<Story> {
-        return storiesList.storiesList()
+    fun getStories(): MutableList<Story> {
+        return storiesListImpl.getStories()
     }
 
-    override fun setStories(story: Story) {
-        storiesList.setStory(story)
+    fun setStories(story: Story) {
+        storiesListImpl.setStory(story)
     }
 
 }
