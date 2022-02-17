@@ -9,21 +9,22 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.AttrRes
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewTreeViewModelStoreOwner
 import com.bumptech.glide.Glide
 import com.example.libstoriespoc.R
 import com.example.libstoriespoc.domain.model.Story
 import com.example.libstoriespoc.presentation.viewmodel.StoriesViewModel
-import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
-@AndroidEntryPoint
 class CustomStoriesActivity @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null, @AttrRes
     defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr), StoryBoardProgressView.StoriesListener {
 
-    @Inject lateinit var storiesViewModel: StoriesViewModel
+    private val storiesViewModel by lazy {
+        ViewModelProvider(ViewTreeViewModelStoreOwner.get(this)!!).get(StoriesViewModel::class.java)
+    }
 
     private lateinit var storyBoardProgressView: StoryBoardProgressView
 
