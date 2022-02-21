@@ -7,6 +7,6 @@ object StoriesService : StoriesListImpl {
     override fun getStories(): MutableList<Story> = StoriesList.getStories()
 
     override fun setStory(story: Story) {
-
+        StoriesList.setStory(story)
     }
 }
