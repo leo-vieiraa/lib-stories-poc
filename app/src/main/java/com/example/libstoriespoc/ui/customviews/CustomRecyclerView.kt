@@ -28,6 +28,5 @@ class CustomRecyclerView @JvmOverloads constructor(
         recycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         usersAdapter = UsersAdapter(model,activity)
         recycler.adapter = usersAdapter
-
     }
   }

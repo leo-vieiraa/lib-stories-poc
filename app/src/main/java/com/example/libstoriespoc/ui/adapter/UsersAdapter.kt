@@ -43,9 +43,7 @@ class UsersAdapter(
 
     class StoriesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-//        var viewModel = StoriesViewModel()
-
-        fun bind(itemCheck: Int, position: Int, model : Story, activity: Activity) {
+        fun bind(itemCheck: Int, position: Int, model : Story,activity: Activity ) {
 
             if (itemCheck == position) {
                 itemView.findViewById<CardView>(R.id.idOutline).apply {
