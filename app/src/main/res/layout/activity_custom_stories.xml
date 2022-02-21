@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".ui.MainActivity"
     tools:parentTag="android.widget.FrameLayout">
 
     <LinearLayout
@@ -24,7 +24,7 @@
             android:layout_weight="1" />
     </LinearLayout>
 
-    <com.example.libstoriespoc.view.customviews.StoryBoardProgressView
+    <com.example.libstoriespoc.ui.customviews.StoryBoardProgressView
         android:id="@+id/storiesProgressView"
         android:layout_width="match_parent"
         android:layout_height="3dp"

@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivityDisplayStories"
+    tools:context=".ui.ActivityDisplayStories"
     android:background="@color/black">
 
-    <com.example.libstoriespoc.view.customviews.CustomStoriesActivity
+    <com.example.libstoriespoc.ui.customviews.CustomStoriesActivity
         android:id="@+id/customStoriesActivity"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
