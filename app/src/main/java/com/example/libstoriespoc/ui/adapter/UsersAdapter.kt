@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide
 import com.example.libstoriespoc.R
 import com.example.libstoriespoc.domain.model.Story
 import com.example.libstoriespoc.presentation.viewmodel.StoriesViewModel
+import java.io.Serializable
 
 class UsersAdapter(
     private var listImages : List<Story>, private var activity: Activity) : RecyclerView.Adapter<UsersAdapter.StoriesViewHolder>() {
@@ -30,7 +31,7 @@ class UsersAdapter(
     @SuppressLint("NotifyDataSetChanged")
     override fun onBindViewHolder(holder: StoriesViewHolder, @SuppressLint("RecyclerView") position: Int) {
         listImages[position].apply {
-            holder.bind(itemCheck, position, this, activity)
+            holder.bind(itemCheck, position, listImages, activity)
             holder.itemView.setOnClickListener {
                 itemCheck = position
                 notifyDataSetChanged()
@@ -43,7 +44,7 @@ class UsersAdapter(
 
     class StoriesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(itemCheck: Int, position: Int, model : Story,activity: Activity ) {
+        fun bind(itemCheck: Int, position: Int, model: List<Story>, activity: Activity ) {
 
             if (itemCheck == position) {
                 itemView.findViewById<CardView>(R.id.idOutline).apply {
@@ -57,13 +58,14 @@ class UsersAdapter(
 
             itemView.findViewById<ImageView>(R.id.imageUser)?.apply {
                 Glide.with(context)
-                    .load(model.thumbnail.x1)
+                    .load(model[position].thumbnail.x1)
                     .placeholder(R.drawable.ic_launcher_foreground)
                     .into(this)
 
                 setOnClickListener {
                     val intent = Intent(context, activity::class.java)
-                    intent.putExtra("storiesList", model)
+                    intent.putExtra("storiesList", (model as Serializable))
+                    intent.putExtra("storyPosition", position)
                     ContextCompat.startActivity(context, intent, null)
                 }
             }

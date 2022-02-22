@@ -16,7 +16,7 @@ import com.example.libstoriespoc.R
 import com.example.libstoriespoc.domain.model.Story
 import com.example.libstoriespoc.presentation.viewmodel.StoriesViewModel
 
-class CustomStoriesActivity @JvmOverloads constructor(
+class CustomStoriesLayout @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null, @AttrRes
     defStyleAttr: Int = 0
@@ -27,22 +27,10 @@ class CustomStoriesActivity @JvmOverloads constructor(
     }
 
     private lateinit var storyBoardProgressView: StoryBoardProgressView
-
+    private lateinit var storiesList: List<Story>
     private var counter = 0
-    private val resourceList = intArrayOf(
-        R.drawable.ic_launcher_foreground,
-        R.drawable.ic_launcher_background,
-        R.drawable.ic_launcher_foreground,
-        R.drawable.ic_launcher_background
-    )
-
-    //TODO: Analisar uso
-    private val durations = longArrayOf(500L, 1000L, 1500L, 4000L)
     private var pressTime = 0L
     private var limit = 500L
-    companion object {
-        private const val PROGRESS_COUNT = 4
-    }
 
     init {
         inflate(context, R.layout.activity_custom_stories, this)
@@ -65,39 +53,37 @@ class CustomStoriesActivity @JvmOverloads constructor(
         false
     }
 
-    fun setupStories(storiesList: Story) {
+    fun setupStories(storiesList: List<Story>, currentItem: Int) {
+
+        val currentStories = storiesList[currentItem]
+        this.storiesList   = storiesList
+        counter = currentItem
 
         findViewById<ImageView>(R.id.imageStories).apply {
             Glide.with(this)
-                .load(storiesList.media.x1)
+                .load(currentStories.media.x1)
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(this)
         }
 
         findViewById<ImageView>(R.id.imgProfile).apply {
             Glide.with(this)
-                .load(storiesList.thumbnail.x1)
+                .load(currentStories.thumbnail.x1)
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(this)
         }
 
-        findViewById<TextView>(R.id.storiesTitle).text = storiesList.title
+        findViewById<TextView>(R.id.storiesTitle).text = currentStories.title
 
         storyBoardProgressView = findViewById<View>(R.id.storiesProgressView) as StoryBoardProgressView
 
         storyBoardProgressView.apply {
-            setStoriesCount(resourceList.size)
+            setStoriesCount(storiesList.size)
             setStoryDuration(3000L)
-            setStoriesListener(this@CustomStoriesActivity)
+            setStoriesListener(this@CustomStoriesLayout)
             startStories(counter)
         }
 
-        // or
-        // storiesProgressView.setStoriesCountWithDurations(durations);
-
-        findViewById<ImageView>(R.id.imageStories)!!.setImageResource(resourceList[counter])
-
-        // bind reverse view
         val reverse = findViewById<View>(R.id.reverse)
 
         reverse.apply {
@@ -110,29 +96,22 @@ class CustomStoriesActivity @JvmOverloads constructor(
         skip.apply {
             setOnClickListener { storyBoardProgressView.skip() }
             setOnTouchListener(onTouchListener)
-            storiesViewModel.setStories(storiesList)
-
+            storiesViewModel.setStories(currentStories)
         }
     }
 
     override fun onNext() {
-        if (counter + 1 > resourceList.size) return
-        findViewById<ImageView>(R.id.imageStories).setImageResource(resourceList[++counter])
-
+        if (counter + 1 > this.storiesList.size) return
+        else return setupStories(storiesList, ++counter)
     }
 
     override fun onPrev() {
         if (counter - 1 < 0) return
-        findViewById<ImageView>(R.id.imageStories).setImageResource(resourceList[--counter])
+        else return setupStories(storiesList, --counter)
     }
 
     override fun onComplete() {
         //storiesViewModel.setStories()
-
-
-
-        //metodo para destruir
-
     }
 
 //    public override fun onDestroy() {
