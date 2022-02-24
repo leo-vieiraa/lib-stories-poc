@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide
 import com.example.libstoriespoc.R
 import com.example.libstoriespoc.domain.model.Story
 import com.example.libstoriespoc.presentation.viewmodel.StoriesViewModel
+import com.example.libstoriespoc.ui.ActivityDisplayStories
 
 class CustomStoriesLayout @JvmOverloads constructor(
     context: Context,
@@ -73,7 +74,9 @@ class CustomStoriesLayout @JvmOverloads constructor(
                 .into(this)
         }
 
-        findViewById<TextView>(R.id.storiesTitle).text = currentStories.title
+        findViewById<TextView>(R.id.storiesTitle).apply{
+            text = currentStories.title
+        }
 
         storyBoardProgressView = findViewById<View>(R.id.storiesProgressView) as StoryBoardProgressView
 
@@ -84,16 +87,14 @@ class CustomStoriesLayout @JvmOverloads constructor(
             startStories(counter)
         }
 
-        val reverse = findViewById<View>(R.id.reverse)
-
-        reverse.apply {
+        // bind reverse view
+        findViewById<View>(R.id.reverse).apply {
             setOnClickListener { storyBoardProgressView.reverse() }
             setOnTouchListener(onTouchListener)
         }
 
         // bind skip view
-        val skip = findViewById<View>(R.id.skip)
-        skip.apply {
+        findViewById<View>(R.id.skip).apply {
             setOnClickListener { storyBoardProgressView.skip() }
             setOnTouchListener(onTouchListener)
             storiesViewModel.setStories(currentStories)
@@ -111,7 +112,7 @@ class CustomStoriesLayout @JvmOverloads constructor(
     }
 
     override fun onComplete() {
-        //storiesViewModel.setStories()
+        (context as ActivityDisplayStories).finish()
     }
 
 //    public override fun onDestroy() {

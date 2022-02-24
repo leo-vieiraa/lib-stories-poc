@@ -9,12 +9,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.libstoriespoc.R
 import com.example.libstoriespoc.domain.model.Story
-import com.example.libstoriespoc.presentation.viewmodel.StoriesViewModel
 import java.io.Serializable
 
 class UsersAdapter(
