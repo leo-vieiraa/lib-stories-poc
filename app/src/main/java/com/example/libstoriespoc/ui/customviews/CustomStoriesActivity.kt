@@ -2,9 +2,12 @@ package com.example.libstoriespoc.ui.customviews
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
@@ -13,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewTreeViewModelStoreOwner
 import com.bumptech.glide.Glide
 import com.example.libstoriespoc.R
+import com.google.android.material.internal.ContextUtils.getActivity
 import com.example.libstoriespoc.domain.model.Story
 import com.example.libstoriespoc.presentation.viewmodel.StoriesViewModel
 
@@ -65,6 +69,7 @@ class CustomStoriesActivity @JvmOverloads constructor(
         false
     }
 
+    @SuppressLint("RestrictedApi")
     fun setupStories(storiesList: Story) {
 
         findViewById<ImageView>(R.id.imageStories).apply {
@@ -79,6 +84,18 @@ class CustomStoriesActivity @JvmOverloads constructor(
                 .load(storiesList.thumbnail.x1)
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(this)
+        }
+
+        findViewById<Button>(R.id.buttonWebView).apply {
+            text = storiesList.text
+            setOnClickListener {
+                val intentButton = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/"))
+                context.startActivity(intentButton)
+            }
+        }
+
+        findViewById<ImageView>(R.id.buttonClose).setOnClickListener {
+            getActivity(context)?.finish()
         }
 
         findViewById<TextView>(R.id.storiesTitle).text = storiesList.title
@@ -118,7 +135,6 @@ class CustomStoriesActivity @JvmOverloads constructor(
     override fun onNext() {
         if (counter + 1 > resourceList.size) return
         findViewById<ImageView>(R.id.imageStories).setImageResource(resourceList[++counter])
-
     }
 
     override fun onPrev() {
