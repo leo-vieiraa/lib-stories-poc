@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         customRecyclerView = findViewById(R.id.customRecyclerViewActivity)
-        customRecyclerView?.init(storiesList, ActivityDisplayStories())
+        customRecyclerView?.init(ActivityDisplayStories())
     }
 
 }
