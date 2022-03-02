@@ -13,8 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.libstoriespoc.R
 import com.example.libstoriespoc.domain.model.Story
-import com.example.libstoriespoc.ui.MainActivity
-import com.example.libstoriespoc.ui.customviews.CustomRecyclerView
 import java.io.Serializable
 
 class UsersAdapter(private var activity: Activity) :
@@ -36,31 +34,19 @@ class UsersAdapter(private var activity: Activity) :
 
         fun bind(position: Int, storiesList: List<Story>, activity: Activity ) {
 
-            if (storiesList[position].viewed) {
-                itemView.findViewById<CardView>(R.id.idOutline).apply {
-                    setCardBackgroundColor(context.resources.getColor(R.color.black))
-                }
-            } else {
-                itemView.findViewById<CardView>(R.id.idOutline).apply {
-                    setCardBackgroundColor(context.resources.getColor(R.color.teal_700))
-                }
-            }
-
             itemView.findViewById<ImageView>(R.id.imageUser)?.apply {
                 Glide.with(context)
                     .load(storiesList[position].thumbnail.x1)
                     .placeholder(R.drawable.ic_launcher_foreground)
                     .into(this)
 
+                checkStories(storiesList[position])
+
                 setOnClickListener {
-                    checkStories(storiesList[position])
                     val intent = Intent(context, activity::class.java)
                     intent.putExtra("storiesList", (storiesList as Serializable))
                     intent.putExtra("storyPosition", position)
-//                    possível futura implementacao
-//                    intent.putExtra("itemView", itemView as Serializable)
                     ContextCompat.startActivity(context, intent, null)
-
                 }
             }
         }

@@ -16,8 +16,6 @@ class ActivityDisplayStories() : AppCompatActivity() {
 
         val storiesList = intent.getSerializableExtra("storiesList") as List<Story>
         val storyPosition = intent.getIntExtra("storyPosition", 0)
-//        possível futura implementacao
-//        val itemView = intent.getSerializableExtra("itemView")
         findViewById<CustomStoriesLayout>(R.id.customStoriesActivity).setupStories(storiesList, storyPosition)
 
     }

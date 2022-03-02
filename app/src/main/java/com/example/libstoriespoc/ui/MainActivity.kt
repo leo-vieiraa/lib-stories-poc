@@ -3,7 +3,6 @@ package com.example.libstoriespoc.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.libstoriespoc.R
-import com.example.libstoriespoc.data.services.StoriesList.storiesList
 import com.example.libstoriespoc.ui.customviews.*
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,6 +17,11 @@ class MainActivity : AppCompatActivity() {
 
         customRecyclerView = findViewById(R.id.customRecyclerViewActivity)
         customRecyclerView?.init(ActivityDisplayStories())
+    }
+
+    override fun onResume() {
+        super.onResume()
+        customRecyclerView?.setupRecyclerView()
     }
 
 }
