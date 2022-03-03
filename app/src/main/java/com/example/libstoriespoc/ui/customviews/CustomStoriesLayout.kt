@@ -9,6 +9,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.AttrRes
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewTreeViewModelStoreOwner
 import com.bumptech.glide.Glide
@@ -21,7 +22,7 @@ class CustomStoriesLayout @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null, @AttrRes
     defStyleAttr: Int = 0
-) : FrameLayout(context, attrs, defStyleAttr), StoryBoardProgressView.StoriesListener {
+) : ConstraintLayout(context, attrs, defStyleAttr), StoryBoardProgressView.StoriesListener {
 
     private val storiesViewModel by lazy {
         ViewModelProvider(ViewTreeViewModelStoreOwner.get(this)!!).get(StoriesViewModel::class.java)
