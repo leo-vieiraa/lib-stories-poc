@@ -4,14 +4,17 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
+import android.view.RoundedCorner
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.AttrRes
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewTreeViewModelStoreOwner
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.libstoriespoc.R
 import com.example.libstoriespoc.domain.model.Story
 import com.example.libstoriespoc.presentation.viewmodel.StoriesViewModel
@@ -21,7 +24,7 @@ class CustomStoriesLayout @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null, @AttrRes
     defStyleAttr: Int = 0
-) : FrameLayout(context, attrs, defStyleAttr), StoryBoardProgressView.StoriesListener {
+) : ConstraintLayout(context, attrs, defStyleAttr), StoryBoardProgressView.StoriesListener {
 
     private val storiesViewModel by lazy {
         ViewModelProvider(ViewTreeViewModelStoreOwner.get(this)!!).get(StoriesViewModel::class.java)
@@ -71,11 +74,16 @@ class CustomStoriesLayout @JvmOverloads constructor(
             Glide.with(this)
                 .load(currentStories.thumbnail.x1)
                 .placeholder(R.drawable.ic_launcher_background)
+                .circleCrop()
                 .into(this)
         }
 
         findViewById<TextView>(R.id.storiesTitle).apply{
             text = currentStories.title
+        }
+
+        findViewById<ImageView>(R.id.buttonClose).setOnClickListener {
+            (context as ActivityDisplayStories).finish()
         }
 
         storyBoardProgressView = findViewById<View>(R.id.storiesProgressView) as StoryBoardProgressView

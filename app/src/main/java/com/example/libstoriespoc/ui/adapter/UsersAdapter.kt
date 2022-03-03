@@ -34,10 +34,15 @@ class UsersAdapter(private var activity: Activity) :
 
         fun bind(position: Int, storiesList: List<Story>, activity: Activity ) {
 
+            if (storiesList[position].highlight) {
+                itemView.findViewById<CardView>(R.id.cardNovidade).visibility = View.VISIBLE
+            }
+
             itemView.findViewById<ImageView>(R.id.imageUser)?.apply {
                 Glide.with(context)
                     .load(storiesList[position].thumbnail.x1)
                     .placeholder(R.drawable.ic_launcher_foreground)
+                    .centerCrop()
                     .into(this)
 
                 checkStories(storiesList[position])
@@ -54,11 +59,11 @@ class UsersAdapter(private var activity: Activity) :
         fun checkStories(story: Story) {
             if (story.viewed) {
                 itemView.findViewById<CardView>(R.id.idOutline).apply {
-                    setCardBackgroundColor(context.resources.getColor(R.color.black))
+                    setCardBackgroundColor(context.resources.getColor(R.color.gray))
                 }
             } else {
                 itemView.findViewById<CardView>(R.id.idOutline).apply {
-                    setCardBackgroundColor(context.resources.getColor(R.color.teal_700))
+                    setCardBackgroundColor(context.resources.getColor(R.color.blue))
                 }
             }
         }
