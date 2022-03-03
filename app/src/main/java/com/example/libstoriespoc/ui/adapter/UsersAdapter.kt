@@ -34,7 +34,7 @@ class UsersAdapter(private var activity: Activity) :
 
         fun bind(position: Int, storiesList: List<Story>, activity: Activity ) {
 
-            if (model.highlight) {
+            if (storiesList[position].highlight) {
                 itemView.findViewById<CardView>(R.id.cardNovidade).visibility = View.VISIBLE
             }
 
