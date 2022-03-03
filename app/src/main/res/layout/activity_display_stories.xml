@@ -7,7 +7,7 @@
     tools:context=".ui.ActivityDisplayStories"
     android:background="@color/black">
 
-    <com.example.libstoriespoc.ui.customviews.CustomStoriesActivity
+    <com.example.libstoriespoc.ui.customviews.CustomStoriesLayout
         android:id="@+id/customStoriesActivity"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

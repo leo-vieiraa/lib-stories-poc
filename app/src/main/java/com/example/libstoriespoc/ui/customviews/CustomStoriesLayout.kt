@@ -2,12 +2,9 @@ package com.example.libstoriespoc.ui.customviews
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
-import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
@@ -16,11 +13,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewTreeViewModelStoreOwner
 import com.bumptech.glide.Glide
 import com.example.libstoriespoc.R
-import com.google.android.material.internal.ContextUtils.getActivity
 import com.example.libstoriespoc.domain.model.Story
 import com.example.libstoriespoc.presentation.viewmodel.StoriesViewModel
+import com.example.libstoriespoc.ui.ActivityDisplayStories
 
-class CustomStoriesActivity @JvmOverloads constructor(
+class CustomStoriesLayout @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null, @AttrRes
     defStyleAttr: Int = 0
@@ -31,22 +28,10 @@ class CustomStoriesActivity @JvmOverloads constructor(
     }
 
     private lateinit var storyBoardProgressView: StoryBoardProgressView
-
+    private lateinit var storiesList: List<Story>
     private var counter = 0
-    private val resourceList = intArrayOf(
-        R.drawable.ic_launcher_foreground,
-        R.drawable.ic_launcher_background,
-        R.drawable.ic_launcher_foreground,
-        R.drawable.ic_launcher_background
-    )
-
-    //TODO: Analisar uso
-    private val durations = longArrayOf(500L, 1000L, 1500L, 4000L)
     private var pressTime = 0L
     private var limit = 500L
-    companion object {
-        private const val PROGRESS_COUNT = 4
-    }
 
     init {
         inflate(context, R.layout.activity_custom_stories, this)
@@ -69,29 +54,28 @@ class CustomStoriesActivity @JvmOverloads constructor(
         false
     }
 
-    @SuppressLint("RestrictedApi")
-    fun setupStories(storiesList: Story) {
+    fun setupStories(storiesList: List<Story>, currentItem: Int) {
+
+        val currentStories = storiesList[currentItem]
+        this.storiesList   = storiesList
+        counter = currentItem
 
         findViewById<ImageView>(R.id.imageStories).apply {
             Glide.with(this)
-                .load(storiesList.media.x1)
+                .load(currentStories.media.x1)
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(this)
         }
 
         findViewById<ImageView>(R.id.imgProfile).apply {
             Glide.with(this)
-                .load(storiesList.thumbnail.x1)
+                .load(currentStories.thumbnail.x1)
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(this)
         }
 
-        findViewById<Button>(R.id.buttonWebView).apply {
-            text = storiesList.action.text
-            setOnClickListener {
-                val intentButton = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/"))
-                context.startActivity(intentButton)
-            }
+        findViewById<TextView>(R.id.storiesTitle).apply{
+            text = currentStories.title
         }
 
         findViewById<ImageView>(R.id.buttonClose).setOnClickListener {
@@ -103,52 +87,38 @@ class CustomStoriesActivity @JvmOverloads constructor(
         storyBoardProgressView = findViewById<View>(R.id.storiesProgressView) as StoryBoardProgressView
 
         storyBoardProgressView.apply {
-            setStoriesCount(resourceList.size)
+            setStoriesCount(storiesList.size)
             setStoryDuration(3000L)
-            setStoriesListener(this@CustomStoriesActivity)
+            setStoriesListener(this@CustomStoriesLayout)
             startStories(counter)
         }
 
-        // or
-        // storiesProgressView.setStoriesCountWithDurations(durations);
-
-        findViewById<ImageView>(R.id.imageStories)!!.setImageResource(resourceList[counter])
-
         // bind reverse view
-        val reverse = findViewById<View>(R.id.reverse)
-
-        reverse.apply {
+        findViewById<View>(R.id.reverse).apply {
             setOnClickListener { storyBoardProgressView.reverse() }
             setOnTouchListener(onTouchListener)
         }
 
         // bind skip view
-        val skip = findViewById<View>(R.id.skip)
-        skip.apply {
+        findViewById<View>(R.id.skip).apply {
             setOnClickListener { storyBoardProgressView.skip() }
             setOnTouchListener(onTouchListener)
-            storiesViewModel.setStories(storiesList)
-
+            storiesViewModel.setStories(currentStories)
         }
     }
 
     override fun onNext() {
-        if (counter + 1 > resourceList.size) return
-        findViewById<ImageView>(R.id.imageStories).setImageResource(resourceList[++counter])
+        if (counter + 1 > this.storiesList.size) return
+        else return setupStories(storiesList, ++counter)
     }
 
     override fun onPrev() {
         if (counter - 1 < 0) return
-        findViewById<ImageView>(R.id.imageStories).setImageResource(resourceList[--counter])
+        else return setupStories(storiesList, --counter)
     }
 
     override fun onComplete() {
-        //storiesViewModel.setStories()
-
-
-
-        //metodo para destruir
-
+        (context as ActivityDisplayStories).finish()
     }
 
 //    public override fun onDestroy() {

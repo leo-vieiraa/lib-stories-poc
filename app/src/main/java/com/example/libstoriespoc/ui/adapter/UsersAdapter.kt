@@ -1,6 +1,5 @@
 package com.example.libstoriespoc.ui.adapter
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.view.LayoutInflater
@@ -9,17 +8,15 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModel
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.libstoriespoc.R
 import com.example.libstoriespoc.domain.model.Story
-import com.example.libstoriespoc.presentation.viewmodel.StoriesViewModel
+import java.io.Serializable
 
-class UsersAdapter(
-    private var listImages : List<Story>, private var activity: Activity) : RecyclerView.Adapter<UsersAdapter.StoriesViewHolder>() {
-
-    private var itemCheck = -1
+class UsersAdapter(private var activity: Activity) :
+    ListAdapter<Story, UsersAdapter.StoriesViewHolder>(StoriesDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoriesViewHolder {
         return LayoutInflater.from(parent.context).inflate(R.layout.item_users, parent, false).let {
@@ -27,48 +24,45 @@ class UsersAdapter(
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    override fun onBindViewHolder(holder: StoriesViewHolder, @SuppressLint("RecyclerView") position: Int) {
-        listImages[position].apply {
-            holder.bind(itemCheck, position, this, activity)
-            holder.itemView.setOnClickListener {
-                itemCheck = position
-                notifyDataSetChanged()
-            }
+    override fun onBindViewHolder(holder: StoriesViewHolder, position: Int) {
+        getItem(position).let {
+            holder.bind(position, currentList, activity)
         }
     }
 
-    override fun getItemCount(): Int = listImages.size
-
-
     class StoriesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(itemCheck: Int, position: Int, model : Story,activity: Activity ) {
+        fun bind(position: Int, storiesList: List<Story>, activity: Activity ) {
 
             if (model.highlight) {
                 itemView.findViewById<CardView>(R.id.cardNovidade).visibility = View.VISIBLE
             }
 
-            if (itemCheck == position) {
+            itemView.findViewById<ImageView>(R.id.imageUser)?.apply {
+                Glide.with(context)
+                    .load(storiesList[position].thumbnail.x1)
+                    .placeholder(R.drawable.ic_launcher_foreground)
+                    .into(this)
+
+                checkStories(storiesList[position])
+
+                setOnClickListener {
+                    val intent = Intent(context, activity::class.java)
+                    intent.putExtra("storiesList", (storiesList as Serializable))
+                    intent.putExtra("storyPosition", position)
+                    ContextCompat.startActivity(context, intent, null)
+                }
+            }
+        }
+
+        fun checkStories(story: Story) {
+            if (story.viewed) {
                 itemView.findViewById<CardView>(R.id.idOutline).apply {
                     setCardBackgroundColor(context.resources.getColor(R.color.gray))
                 }
             } else {
                 itemView.findViewById<CardView>(R.id.idOutline).apply {
                     setCardBackgroundColor(context.resources.getColor(R.color.blue))
-                }
-            }
-
-            itemView.findViewById<ImageView>(R.id.imageUser)?.apply {
-                Glide.with(context)
-                    .load(model.thumbnail.x1)
-                    .placeholder(R.drawable.ic_launcher_foreground)
-                    .into(this)
-
-                setOnClickListener {
-                    val intent = Intent(context, activity::class.java)
-                    intent.putExtra("storiesList", model)
-                    ContextCompat.startActivity(context, intent, null)
                 }
             }
         }
