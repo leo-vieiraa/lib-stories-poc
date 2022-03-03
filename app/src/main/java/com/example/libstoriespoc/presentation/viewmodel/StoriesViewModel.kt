@@ -12,8 +12,8 @@ import javax.inject.Inject
 class StoriesViewModel @Inject constructor(
     private val repository: StoriesRepository) : ViewModel() {
 
-    val _checkStories = MutableLiveData<MutableList<Story>>()
-    val checkStories : LiveData<MutableList<Story>> = _checkStories
+    val _checkStories = MutableLiveData<List<Story>>()
+    val checkStories : LiveData<List<Story>> = _checkStories
 
     fun getStories() {
         _checkStories.value = repository.getStories()
