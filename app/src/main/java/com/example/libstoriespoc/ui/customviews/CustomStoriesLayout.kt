@@ -78,6 +78,12 @@ class CustomStoriesLayout @JvmOverloads constructor(
             text = currentStories.title
         }
 
+        findViewById<ImageView>(R.id.buttonClose).setOnClickListener {
+            getActivity(context)?.finish()
+        }
+
+        findViewById<TextView>(R.id.storiesTitle).text = storiesList.title
+
         storyBoardProgressView = findViewById<View>(R.id.storiesProgressView) as StoryBoardProgressView
 
         storyBoardProgressView.apply {
