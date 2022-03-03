@@ -58,7 +58,7 @@ class UsersAdapter(private var activity: Activity) :
         fun checkStories(story: Story) {
             if (story.viewed) {
                 itemView.findViewById<CardView>(R.id.idOutline).apply {
-                    setCardBackgroundColor(context.resources.getColor(R.color.gray_scale))
+                    setCardBackgroundColor(context.resources.getColor(R.color.gray))
                 }
             } else {
                 itemView.findViewById<CardView>(R.id.idOutline).apply {
