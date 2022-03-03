@@ -88,7 +88,8 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_margin="15dp"
-            android:src="@drawable/ic__close"
+            android:src="@drawable/ic_close"
+            android:contentDescription="Botão fechar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

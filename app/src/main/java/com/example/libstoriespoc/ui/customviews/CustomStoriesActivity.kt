@@ -87,7 +87,7 @@ class CustomStoriesActivity @JvmOverloads constructor(
         }
 
         findViewById<Button>(R.id.buttonWebView).apply {
-            text = storiesList.text
+            text = storiesList.action.text
             setOnClickListener {
                 val intentButton = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/"))
                 context.startActivity(intentButton)

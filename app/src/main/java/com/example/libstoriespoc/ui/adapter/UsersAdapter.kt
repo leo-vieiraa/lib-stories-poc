@@ -45,13 +45,17 @@ class UsersAdapter(
 
         fun bind(itemCheck: Int, position: Int, model : Story,activity: Activity ) {
 
+            if (model.highlight) {
+                itemView.findViewById<CardView>(R.id.cardNovidade).visibility = View.VISIBLE
+            }
+
             if (itemCheck == position) {
                 itemView.findViewById<CardView>(R.id.idOutline).apply {
-                    setCardBackgroundColor(context.resources.getColor(R.color.black))
+                    setCardBackgroundColor(context.resources.getColor(R.color.gray))
                 }
             } else {
                 itemView.findViewById<CardView>(R.id.idOutline).apply {
-                    setCardBackgroundColor(context.resources.getColor(R.color.teal_700))
+                    setCardBackgroundColor(context.resources.getColor(R.color.blue))
                 }
             }
 
