@@ -42,6 +42,7 @@ class UsersAdapter(private var activity: Activity) :
                 Glide.with(context)
                     .load(storiesList[position].thumbnail.x1)
                     .placeholder(R.drawable.ic_launcher_foreground)
+                    .centerCrop()
                     .into(this)
 
                 checkStories(storiesList[position])

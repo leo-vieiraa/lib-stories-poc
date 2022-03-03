@@ -41,7 +41,7 @@ object StoriesList {
                 highlight = false,
                 thumbnail = Thumbnail(
                     title = "Ilustra de um homem com o braço erguido celebrando.",
-                    x1 = "https://www.serasa.com.br/assets/ssw-files/2021-01-29/e1c31d6e26/default_e1c31d6e26.png",
+                    x1 = "https://wallpapers.com/images/high/3d-green-android-icon-hglf3wgojase3hm6.jpg",
                     x2 = "https://www.serasa.com.br/assets/ssw-files/2021-01-29/e1c31d6e26/default_e1c31d6e26.png"
                 ),
                 media = Media(
@@ -65,7 +65,7 @@ object StoriesList {
                 highlight = true,
                 thumbnail = Thumbnail(
                     title = "Ilustra de um homem com o braço erguido celebrando.",
-                    x1 = "https://www.serasa.com.br/assets/ssw-files/2021-01-29/e1c31d6e26/default_e1c31d6e26.png",
+                    x1 = "https://optclean.com.br/wp-content/uploads/2017/08/3d-wallpaper-for-android-hd.jpg",
                     x2 = "https://www.serasa.com.br/assets/ssw-files/2021-01-29/e1c31d6e26/default_e1c31d6e26.png"
                 ),
                 media = Media(
@@ -89,7 +89,7 @@ object StoriesList {
                 highlight = false,
                 thumbnail = Thumbnail(
                     title = "Ilustra de um homem com o braço erguido celebrando.",
-                    x1 = "https://www.serasa.com.br/assets/ssw-files/2021-01-29/e1c31d6e26/default_e1c31d6e26.png",
+                    x1 = "https://w0.peakpx.com/wallpaper/194/827/HD-wallpaper-black-amoled-android-amoled-android-black-brand-technology-thumbnail.jpg",
                     x2 = "https://www.serasa.com.br/assets/ssw-files/2021-01-29/e1c31d6e26/default_e1c31d6e26.png"
                 ),
                 media = Media(
@@ -113,7 +113,7 @@ object StoriesList {
                 highlight = true,
                 thumbnail = Thumbnail(
                     title = "Ilustra de um homem com o braço erguido celebrando.",
-                    x1 = "https://www.serasa.com.br/assets/ssw-files/2021-01-29/e1c31d6e26/default_e1c31d6e26.png",
+                    x1 = "https://i.pinimg.com/736x/64/2e/b9/642eb9ef25555166c109a16614f14b89.jpg",
                     x2 = "https://www.serasa.com.br/assets/ssw-files/2021-01-29/e1c31d6e26/default_e1c31d6e26.png"
                 ),
                 media = Media(
