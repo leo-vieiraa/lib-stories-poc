@@ -94,7 +94,7 @@ object StoriesList {
                 ),
                 media = Media(
                     title = "Ilustra de um homem com o braço erguido celebrando. A esquerda, o texto \"deixa suas dívidas para trás, até 90% de desconto\". Acima, o logo do Serasa Limpa Nome.",
-                    x1 = "https://www.serasa.com.br/assets/ssw-files/2021-01-29/85dc5ea466/large_85dc5ea466.png",
+                    x1 = "https://www.petlove.com.br/images/breeds/193223/profile/original/golden_retriever-p.jpg?1532539102",
                     x2 = "https://www.serasa.com.br/assets/ssw-files/2021-01-29/85dc5ea466/default_85dc5ea466.png"
                 ),
                 texts = arrayListOf(),
