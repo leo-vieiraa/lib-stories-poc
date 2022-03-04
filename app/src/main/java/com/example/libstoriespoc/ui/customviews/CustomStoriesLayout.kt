@@ -2,9 +2,12 @@ package com.example.libstoriespoc.ui.customviews
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.AttrRes
@@ -79,6 +82,14 @@ class CustomStoriesLayout @JvmOverloads constructor(
 
         findViewById<ImageView>(R.id.buttonClose).setOnClickListener {
             (context as ActivityDisplayStories).finish()
+        }
+
+        findViewById<Button>(R.id.buttonWebView).apply {
+            text = storiesList[currentItem].action.text
+            setOnClickListener {
+                val intentButton = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/"))
+                context.startActivity(intentButton)
+            }
         }
 
         storyBoardProgressView = findViewById<View>(R.id.storiesProgressView) as StoryBoardProgressView
