@@ -130,13 +130,13 @@ object StoriesList {
             )
         )
 
-    fun getStories(): MutableList<Story> {
+    suspend fun getStories(): MutableList<Story> {
         //Stories LNO List<HomeStoriesList>
         //Stories Premium List<>
         return storiesList
     }
 
-    fun setStory(story: Story) {
+    suspend fun setStory(story: Story) {
         storiesList.forEach {
             if (it.key == story.key) {
                 it.viewed = true

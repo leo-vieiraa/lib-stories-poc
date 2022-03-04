@@ -4,8 +4,8 @@ import com.example.libstoriespoc.domain.model.Story
 
 interface StoriesListImpl {
 
-    fun getStories() : MutableList<Story>
+    suspend fun getStories() : MutableList<Story>
 
-    fun setStory(story: Story)
+    suspend fun setStory(story: Story)
 
 }

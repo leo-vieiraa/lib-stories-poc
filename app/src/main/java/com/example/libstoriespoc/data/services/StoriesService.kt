@@ -4,9 +4,9 @@ import com.example.libstoriespoc.domain.model.Story
 
 object StoriesService : StoriesListImpl {
 
-    override fun getStories(): MutableList<Story> = StoriesList.getStories()
+    override suspend fun getStories(): MutableList<Story> = StoriesList.getStories()
 
-    override fun setStory(story: Story) {
+    override suspend fun setStory(story: Story) {
         StoriesList.setStory(story)
     }
 }
