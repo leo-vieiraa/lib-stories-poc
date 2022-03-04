@@ -4,9 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
-import android.view.RoundedCorner
 import android.view.View
-import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.AttrRes
@@ -14,7 +12,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewTreeViewModelStoreOwner
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.libstoriespoc.R
 import com.example.libstoriespoc.domain.model.Story
 import com.example.libstoriespoc.presentation.viewmodel.StoriesViewModel
@@ -66,14 +63,12 @@ class CustomStoriesLayout @JvmOverloads constructor(
         findViewById<ImageView>(R.id.imageStories).apply {
             Glide.with(this)
                 .load(currentStories.media.x1)
-                .placeholder(R.drawable.ic_launcher_background)
                 .into(this)
         }
 
         findViewById<ImageView>(R.id.imgProfile).apply {
             Glide.with(this)
                 .load(currentStories.thumbnail.x1)
-                .placeholder(R.drawable.ic_launcher_background)
                 .circleCrop()
                 .into(this)
         }
@@ -90,7 +85,7 @@ class CustomStoriesLayout @JvmOverloads constructor(
 
         storyBoardProgressView.apply {
             setStoriesCount(storiesList.size)
-            setStoryDuration(3000L)
+            setStoryDuration(5000L)
             setStoriesListener(this@CustomStoriesLayout)
             startStories(counter)
         }
